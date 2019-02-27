@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node app.ts",
+    "start": "ts-node App.ts",
     "server:start": "node ./server/server.js",
     "udp:start": "ts-node ./services/UdpFloodService.ts",
     "killnode": "taskkill /im node.exe /F"
@@ -18,11 +18,13 @@
     "evilscan": "^1.7.5",
     "express": "^4.16.4",
     "install": "^0.12.2",
+    "ip": "^1.1.5",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "portscanner": "^2.2.0",
     "prompt-confirm": "^2.0.4",
     "q": "^1.5.1",
+    "raw-socket": "^1.6.4",
     "tcp-port-used": "^1.0.1",
     "typescript": "^3.3.3333"
   },

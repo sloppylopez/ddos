@@ -29,9 +29,9 @@ tcpPortUsed.check(3000, '127.0.0.1')
         console.error('Error on check:', err.message);
     });
 
-function udpFlood(host, port, timeout, pid) {
+function udpFlood(ips, port, timeout, pid) {
 
-    let HOST = host;
+    let HOST = ips;
 
     let output = "";
     for (let i = 65500; i >= 0; i--) {
