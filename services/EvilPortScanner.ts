@@ -1,4 +1,4 @@
-const evilScan = require('evilscan');
+const Evilscan = require('evilscan');
 
 function scanPortsForIp(ip: string) {
     let openPorts = [];
@@ -8,7 +8,7 @@ function scanPortsForIp(ip: string) {
         status: 'TROU',
         banner: true
     };
-    const scanner = new evilScan(options);
+    const scanner = new Evilscan(options);
     scanner.on('result', function (data) {
         // fired when item is matching options
         if (data.status === 'open') {

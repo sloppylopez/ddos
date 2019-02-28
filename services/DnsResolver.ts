@@ -1,11 +1,12 @@
 const dns = require('dns');
 
-function resolveHostname(hostname) {
-    return new Promise(function (resolve, reject) {
-        dns.resolveAny(hostname, function (err, result) {
+function resolveHostname(hostname) { //TODO sometimes the dns.resolveAny method seems to fail... try to discover why
+    return new Promise((resolve, reject) => {
+        dns.resolveAny(hostname, (err, result) => {
             let ips;
             if (err) {
-                throw reject(err);
+                console.log(err);
+                return reject(err);
             }
             const ipsFilter = (item) => {
                 return item.type === 'A' || item.type === 'AAAA';//Ipv4 Ipv6
