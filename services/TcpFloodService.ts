@@ -1,26 +1,23 @@
-let dgram = require('dgram');
+// Include Nodejs' net module.
+const Net = require('net');
 
-function tcpFlood(ips, port, timeout, pid) {
+function tcpFlood(ip, port, timout, pid) {
     return new Promise((resolve, reject) => {
-        let HOST = ips;
-        let output = "";
-
-        for (let i = 65500; i >= 0; i--) {
-            output += "X";
-        }
-
-        let socket = dgram.createSocket('udp4');
-        let message = Buffer.from(output);
-
-        socket.send(message, 0, message.length, port, HOST, function (err, bytes) {
-            if (err) throw err;
-            // console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes to ' + HOST + ':' + port + ' from ' + socket.address().address + ':' + socket.address().port);
-            resolve([pid, bytes, HOST, port, socket.address().address, socket.address().port]);
+        // Create a new TCP client.
+        const socket = new Net.Socket();
+        // Send a connection request to the server.
+        socket.connect({port: port, host: ip}, function () {
+            // If there is no error, the server has accepted the request and created a new
+            // socket dedicated to us.
+            // The client can now send data to the server by writing to its socket.
+            socket.write('Hello, server.');
+            console.log('Worker pid: ' + pid + ' sent package TCP to ' + ip + ':' + port + ' from ' + socket.address().address + ':' + socket.address().port);
+            resolve()
         });
 
-        socket.on('error', (err, rinfo) => {
-            reject(err);
-            // console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+        socket.on('error', function (error) {
+            console.log('Error found', error);
+            reject(error)
         });
     });
 }

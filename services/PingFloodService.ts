@@ -41,7 +41,7 @@ raw.writeChecksum(buffer, 2, raw.createChecksum(buffer));
 function pingFlood(ip, port, timeout, pid) {
 
     return new Promise((resolve, reject) => {
-        socket.send(buffer, 0, buffer.length, target, function (error, bytes) {
+        socket.send(buffer, 0, buffer.length, ip, function (error, bytes) {
             if (error) {
                 console.log(error.toString());
                 reject(error);
