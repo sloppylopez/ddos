@@ -1,5 +1,4 @@
 # ddos
-W.I.P
 
 1)npm run server:start
 
