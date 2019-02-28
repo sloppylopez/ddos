@@ -1,0 +1,40 @@
+"C:\Program Files\nodejs\node.exe" C:\Users\sergi\IdeaProjects\ddos\App.js -h localhost -p 3000 -t 200000 -T UDP
+Debugger listening on ws://127.0.0.1:56121/a2f51925-38c6-4f93-ac36-3c8014b8906a
+For help, see: https://nodejs.org/en/docs/inspector
+Master 26124 is running
+(node:26124) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Found ips for localhost: [{"address":"127.0.0.1","ttl":0,"type":"A"}]
+Debugger listening on ws://127.0.0.1:56123/69fb3b75-aa67-404a-82f5-680377fd4088
+For help, see: https://nodejs.org/en/docs/inspector
+Debugger listening on ws://127.0.0.1:56125/801c3d14-8435-4184-8668-44f161f03811
+For help, see: https://nodejs.org/en/docs/inspector
+Worker 25496 started
+*** Worker 25496 starting on 127.0.0.1 using range: (0, 7999) ***
+(node:25496) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+*** Worker 25496 found open port:3000
+Worker 24140 started
+*** Worker 24140 starting on 127.0.0.1 using range: (8000, 15999) ***
+(node:24140) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49696
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49697
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49698
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49699
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49700
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49701
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49702
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49703
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49704
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49705
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:3000 from 0.0.0.0:49706
+*** Worker 25496 found open port:5040
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49710
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49711
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49712
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49713
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49714
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49715
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49716
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49717
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49718
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49719
+pid: 25496 sent package UDP with 65501 bytes message to 127.0.0.1:5040 from 0.0.0.0:49720
