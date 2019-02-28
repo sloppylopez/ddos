@@ -14,6 +14,7 @@ function udpFlood(ips, port, timeout, pid) {
             if (nowTime.getTime() >= (startTime.getTime() + timeout)) {
                 console.log('Timeout Reached for pid: ' + pid);
                 clearInterval(intervalObj);
+                process.exit(0)
             }
         }
         // const randomPort = Math.floor(Math.random() * (65535) + 1);
