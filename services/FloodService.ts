@@ -14,8 +14,7 @@ function flood(type, ip, scannedPort, port, timeout) {
                 resolve(udpFlood(ip, port, timeout, process.pid));
                 break;
             case 'PING':
-                // pingFlood(ip, port, timeout, process.pid);
-                console.log('flooding');
+                resolve(pingFlood(ip, port, timeout, process.pid));
                 break;
             default:
                 // udpFlood(ip, port, timeout, process.pid);

