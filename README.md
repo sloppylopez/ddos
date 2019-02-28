@@ -22,7 +22,7 @@ Working Features:
 
 Observations:
 
-This project was build in 48 hours
+This project was build in 48 hours using a Windows 10 Fresh Laptop
 
 You will need to start you IDE in admin mode on Windows 10 for the raw-socket to work
 
