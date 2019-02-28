@@ -3,7 +3,6 @@ const dns = require('dns');
 function resolveHostname(hostname) { //TODO sometimes the dns.resolveAny method seems to fail... try to discover why
     return new Promise((resolve, reject) => {
         dns.resolveAny(hostname, (err, result) => {
-            let ips;
             if (err) {
                 console.log(err);
                 return reject(err);
@@ -11,7 +10,7 @@ function resolveHostname(hostname) { //TODO sometimes the dns.resolveAny method 
             const ipsFilter = (item) => {
                 return item.type === 'A' || item.type === 'AAAA';//Ipv4 Ipv6
             };
-            ips = result.filter(ipsFilter);
+            let ips = result.filter(ipsFilter);
             return resolve(ips);
         });
     });
